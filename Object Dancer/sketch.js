@@ -13,16 +13,13 @@
 let dancer;
 
 function setup() {
-  // no adjustments in the setup function needed...
   let canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("p5-canvas-container");
 
-  // ...except to adjust the dancer's name on the next line:
   dancer = new YuliaDancer(width / 2, height / 2);
 }
 
 function draw() {
-  // you don't need to make any adjustments inside the draw loop
   background(0);
   drawFloor(); // for reference only
 
@@ -30,57 +27,45 @@ function draw() {
   dancer.display();
 }
 
-// You only code inside this class.
-// Start by giving the dancer your name, e.g. LeonDancer.
 class YuliaDancer {
   constructor(startX, startY) {
     this.x = startX;
     this.y = startY;
-    // add properties for your dancer here:
-    //..
-    //..
-    //..
-    this.bounceAmplitude = 8; // Height of the bounce
-    this.sideAmplitude = 8; // Width of the side movement
-    this.rotationAmplitude = 2; // Degrees of rotation
-    this.angle = 0; // Current angle for rotation
+    this.bounceAmplitude = 8; 
+    this.sideAmplitude = 8; 
+    this.angle = 0; 
   }
   update() {
-    // update properties here to achieve
-    // your dancer's desired moves and behaviour
     this.y += sin(frameCount * 0.1) * this.bounceAmplitude;
     this.x += cos(frameCount * 0.1) * this.sideAmplitude;
     this.angle = sin(frameCount * 0.2) * this.rotationAmplitude;
   }
   display() {
-    // the push and pop, along with the translate 
-    // places your whole dancer object at this.x and this.y.
-    // you may change its position on line 19 to see the effect.
     push();
     translate(this.x, this.y);
 
     // ******** //
     // ⬇️ draw your dancer from here ⬇️
 
-// Head and Body
+// head and body
 noStroke();
 fill(186, 189, 194);
 ellipse(0, -35, 190, 160); 
 ellipse(0, 50, 60, 80); 
 
-// Mouth
+// mouth
 stroke(0);
 strokeWeight(2);
 ellipse(10, 18, 20, 5); 
-//Blood
+//blood
 stroke(255,0,0);
 strokeWeight(5);
 line(0,20,0,35);
 
-// Arms and Legs
+// arms and legs
 this.drawLimbs();
 
-// Eyes
+// eyes
 this.drawEyes();
 
 pop(); 
@@ -89,12 +74,12 @@ pop();
 drawLimbs() {
 let swingAngle = sin(frameCount * 2) * 20;
 
-// Arms
+// arms
 stroke(250);
 this.drawLimb(-28, 42, swingAngle, -4, 40); // Left arm
 this.drawLimb(28, 42, -swingAngle, -10, 40); // Right arm
 
-// Legs
+// legs
 this.drawLimb(-10, 88, -swingAngle, -5, 27); // Left leg
 this.drawLimb(10, 88, swingAngle, -2, 27); // Right leg
 }
@@ -108,7 +93,7 @@ pop();
 }
 
 drawEyes() {
-// Left Eye
+// left eye
 push();
 noFill();
 strokeWeight(3);
@@ -129,7 +114,7 @@ let time = frameCount * 0.1;
   }
 pop();
 
-// Right Eye
+// right eye
 push();
 noFill();
 strokeWeight(3);
