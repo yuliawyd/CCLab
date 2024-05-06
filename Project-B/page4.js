@@ -15,8 +15,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   videos.forEach((video) => video.hide());
-  c = createGraphics(windowWidth / 2, windowHeight / 2);
-  frameStart = Date.now();
+  startFrame(1);
   videos[1].loop();
 }
 
@@ -24,7 +23,8 @@ function draw() {
   background(bg);
   textAlign(CENTER, CENTER);
   textSize(32);
-  fill(255, 0, 0);
+  textFont('Briem Hand');
+  fill(95, 202, 232);
 
   switch (frame) {
     case 1:
@@ -44,15 +44,15 @@ function windowResized() {
 }
 
 function drawFrame1() {
-  processPixels(videos[1], c, windowWidth / 2);
+  processPixels(videos[1], c, windowWidth * 0.7);
   image_center(c, windowWidth / 2, windowHeight / 2);
   text("Still got caught...", windowWidth / 2, windowHeight / 4 + 10);
 }
 
 function drawFrame2() {
-  processPixels(videos[2], c, windowWidth / 2);
+  processPixels(videos[2], c, windowWidth * 0.7);
   image_center(c, windowWidth / 2, windowHeight / 2);
-  textFont("Chiller");
+  textFont('Briem Hand');
 
   if (Date.now() - frameStart > 1000) {
     text("Sleeping in class...", windowWidth / 4, (windowHeight * 2) / 4 - 50);
@@ -73,19 +73,19 @@ function drawFrame2() {
   }
   if (Date.now() - frameStart > 4000) {
     text(
-      "You won't be able to get into university if you keep doing this!",
+      "You won't be able to get into university if you keep doing this!!",
       (windowWidth * 2) / 4,
       (windowHeight * 3) / 4 + 50
     );
   }
-  textFont("Times New Roman");
+  textFont('Briem Hand');
 }
 
 function drawFrame3() {
-  processPixels(videos[3], c, windowWidth / 2);
+  processPixels(videos[3], c, windowWidth * 0.7);
   image_center(c, windowWidth / 2, windowHeight / 2);
   text(
-    "no, I have to get in to university...",
+    "No, I have to get in to university...",
     windowWidth / 2,
     windowHeight / 4 + 10
   );
@@ -93,18 +93,14 @@ function drawFrame3() {
 
 function mousePressed() {
   if (frame === 1) {
-    frame = 2;
-    frameStart = Date.now();
     videos[1].pause();
     videos[2].loop();
-    c = createGraphics(windowWidth / 2, windowHeight / 2);
+    startFrame(2);
   } else if (frame === 2) {
-    frame = 3;
-    frameStart = Date.now();
     videos[2].pause();
     videos[3].loop();
-    c = createGraphics(windowWidth / 2, windowHeight / 2);
+    startFrame(3);
   } else if (frame === 3) {
-    window.location.href = "./page5.htm";
+    window.location.href = "./page5.html";
   }
 }

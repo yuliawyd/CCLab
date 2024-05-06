@@ -1,6 +1,6 @@
 let bg;
 let timetable;
-let days = ["MON", "TUE", "WED", "THU", "FRI"];
+let days = ["MON", "WED", "FRI"];
 let day;
 let video;
 let video2;
@@ -24,10 +24,10 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   video.hide();
   video2.hide();
-  c = createGraphics(windowWidth / 2, windowHeight / 2);
-  c2 = createGraphics(windowWidth / 2, windowHeight / 2);
+
+  c = createGraphics(windowWidth * 0.6, windowHeight * 0.6);
+  c2 = createGraphics(windowWidth * 0.7, windowHeight * 0.7);
   bgMusic.loop();
-  video.muted = true;
   video.loop();
 }
 
@@ -38,29 +38,24 @@ function draw() {
 
   fill(0);
   rect(windowWidth - 220, 10, 220, 50);
-  fill(255, 0, 0);
+  fill(255, 255, 255);
   text(day + " 7:00 AM", windowWidth - 110, 40);
 
-  textFont("Chiller");
+  textFont('Briem Hand');
   textSize(48);
-  text("Good Morning! Welcome to my school life!", windowWidth / 2, windowHeight / 4 - 120);
-  textFont("Times New Roman");
+  text("Good Morning! Welcome to Kitty's high school campus life!", windowWidth / 2, windowHeight / 4 - 120);
+  textFont('Briem Hand');
   textSize(32);
 
-  let rotation = map(noise(t), 0, 1, -PI / 32, PI / 32);
-  push();
-  translate(windowWidth / 4, windowHeight / 4);
-  rotate(rotation);
-  imageMode(CENTER);
+  let jitterX = random(-1, 1);
+  let jitterY = random(-1, 1);
   image(
     timetable,
+    windowWidth / 2 - windowWidth / 8 + jitterX,
+    windowHeight / 2 + jitterY - (windowWidth * 1378) / 1080 / 8 + jitterY,
     windowWidth / 4,
-    windowHeight / 4,
-    windowWidth / 4,
-    windowWidth * 1378/ 1080 / 4
+    (windowWidth * 1378) / 1080 / 4
   );
-  pop();
-  t += 0.01;
 
   drawFrame1();
   if (showFrame2) {
@@ -69,12 +64,18 @@ function draw() {
 
   textSize(32);
   fill(255);
-  rect(windowWidth / 2 - 160, (3 * windowHeight) / 4 + 80, 160, 40);
+  rect(windowWidth / 2 - 180, (3 * windowHeight) / 4 + 80, 160, 40);
   rect(windowWidth / 2 + 20, (3 * windowHeight) / 4 + 80, 160, 40);
 
   fill(0);
-  text("MATH", windowWidth / 2 - 80, (3 * windowHeight) / 4 + 102);
+  text("MATH", windowWidth / 2 - 100, (3 * windowHeight) / 4 + 102);
   text("ENGLISH", windowWidth / 2 + 100, (3 * windowHeight) / 4 + 102);
+  fill(95, 202, 232);
+  text(
+    "Which course should you take now?",
+    windowWidth / 2,
+    (windowHeight * 3) / 4 + 140
+  );
 }
 
 function windowResized() {
@@ -94,7 +95,7 @@ function mousePressed() {
     mouseY > (3 * windowHeight) / 4 + 80 &&
     mouseY < (3 * windowHeight) / 4 + 120
   ) {
-    window.location.href = "page2.htm";
+    window.location.href = "page2.html";
   }
   if (
     mouseX > windowWidth / 2 + 20 &&
@@ -109,17 +110,18 @@ function mousePressed() {
 }
 
 function drawFrame1() {
-  processPixels(video, c, 400);
-  image(c, 0, windowHeight - 240);
+  processPixels(video, c, windowWidth * 0.7);
+  image_center(c, 220, windowHeight * 0.6);
 }
 
 function drawFrame2() {
-  processPixels(video2, c2, windowWidth / 2);
+  processPixels(video2, c2, windowWidth * 0.7);
   image_center(c2, windowWidth / 2, windowHeight / 2);
 
+  fill(255,0,0);
   textSize(48);
 
-  text("NO！WRONG！", windowWidth / 2, windowHeight / 4 + 20);
+  text("NO！WRONG CHOICE！", windowWidth / 2, windowHeight / 4 + 20);
 
   if (Date.now() - frame2StartTime >= 5000) {
     video2.stop();

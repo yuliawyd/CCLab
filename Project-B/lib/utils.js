@@ -1,5 +1,5 @@
 function getVideoHeight(width) {
-  return (9 * width) / 16;
+  return (2160 * width) / 3832;
 }
 
 function processPixels(video, graphics, width) {
@@ -18,4 +18,10 @@ function processPixels(video, graphics, width) {
 
 function image_center(img, x, y) {
   image(img, x - img.width / 2, y - img.height / 2);
+}
+
+function startFrame(i) {
+  frame = i;
+  frameStart = Date.now();
+  c = createGraphics(windowWidth * 0.7, getVideoHeight(windowWidth * 0.7));
 }

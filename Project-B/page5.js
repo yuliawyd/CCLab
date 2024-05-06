@@ -15,8 +15,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   videos.forEach((video) => video.hide());
-  c = createGraphics(windowWidth / 2, windowHeight / 2);
-  frameStart = Date.now();
+  startFrame(1);
   videos[1].loop();
 }
 
@@ -24,7 +23,8 @@ function draw() {
   background(bg);
   textAlign(CENTER, CENTER);
   textSize(32);
-  fill(255, 0, 0);
+  textFont('Briem Hand');
+  fill(95, 202, 232);
 
   switch (frame) {
     case 1:
@@ -44,14 +44,14 @@ function windowResized() {
 }
 
 function drawFrame1() {
-  processPixels(videos[1], c, windowWidth / 2);
+  processPixels(videos[1], c, windowWidth * 0.7);
   image_center(c, windowWidth / 4, windowHeight / 2);
 
   text("After that day...", windowWidth / 4, windowHeight / 4 + 10);
 
   if (Date.now() - frameStart > 1000) {
     text(
-      "Start to study hard...",
+      "Kitty started to study hard...",
       (windowWidth * 3) / 4,
       (windowHeight * 2) / 4 - 100
     );
@@ -72,15 +72,16 @@ function drawFrame1() {
 }
 
 function drawFrame2() {
-  processPixels(videos[2], c, windowWidth / 2);
+  processPixels(videos[2], c, windowWidth * 0.7);
   image_center(c, windowWidth / 2, windowHeight / 2);
 
-  text("Finally, pass the exams", windowWidth / 2, (windowHeight * 1) / 4 - 50);
+  text("Finally, passed the exams", windowWidth / 2, (windowHeight * 1) / 4 - 50);
 
   if (Date.now() - frameStart > 1000) {
     textSize(64);
+    fill(255,0,0);
     text(
-      "Admitted to university!!!",
+      "Admitted to NYUSH!!!",
       windowWidth / 2,
       (windowHeight * 3) / 4 + 50
     );
@@ -89,7 +90,7 @@ function drawFrame2() {
 }
 
 function drawFrame3() {
-  processPixels(videos[3], c, windowWidth / 2);
+  processPixels(videos[3], c, windowWidth * 0.7);
   image_center(c, windowWidth / 2, windowHeight / 2);
   text(
     "Honestly, this should be a happy thing.",
@@ -97,7 +98,7 @@ function drawFrame3() {
     (windowHeight * 3) / 4 + 0
   );
   text(
-    "However，it actually doesn’t feel so.",
+    "However, Kitty doesn't actually feel so.",
     windowWidth / 2,
     (windowHeight * 3) / 4 + 50
   );
@@ -105,18 +106,14 @@ function drawFrame3() {
 
 function mousePressed() {
   if (frame === 1) {
-    frameStart = Date.now();
     videos[1].stop();
     videos[2].loop();
-    c = createGraphics(windowWidth / 2, windowHeight / 2);
-    frame = 2;
+    startFrame(2);
   } else if (frame === 2) {
-    frameStart = Date.now();
     videos[2].stop();
     videos[3].loop();
-    c = createGraphics(windowWidth / 2, windowHeight / 2);
-    frame = 3;
+    startFrame(3);
   } else if (frame === 3) {
-    window.location.href = "./page6.htm";
+    window.location.href = "./page6.html";
   }
 }
